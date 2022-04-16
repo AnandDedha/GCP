@@ -1,13 +1,13 @@
-# Create a simple array with square brackets
+#Create a simple array with square brackets
 #standardSQL
 CREATE OR REPLACE TABLE `array-and-struct.array.restaurant_cuisine` AS (
-SELECT "Cafe Paci" AS name, "Newtown" AS location, ["European", "Casual", "Wine bar"] AS cuisine_array
+SELECT "Cafe Pacific" AS name, "North York" AS location, ["European", "Casual", "Wine bar"] AS cuisine_array
 UNION ALL
-SELECT "Ho Jiak" AS name, "Haymarket" AS location, ["Malaysian", "Street-food"] AS cuisine_array
+SELECT "Boston Pizza" AS name, "Toronto" AS location, ["Italian", "Pizza", "Fast-food"] AS cuisine_array
 UNION ALL
-SELECT "Spice I Am" AS name, "Surry Hills" AS location, ["Thai", "Casual"] AS cuisine_array
+SELECT "Spice on the Streets" AS name, "New York" AS location, ["Indian", "Casual", "Street-food"] AS cuisine_array
 UNION ALL
-SELECT "Chaco Bar" AS name, "Potts Point" AS location, ["Japanese", "Yakitori", "Casual"] AS cuisine_array);
+SELECT "Sushi Bar" AS name, "LA" AS location, ["Japanese", "Sushi", "Casual"] AS cuisine_array);
 
 
 # Break open an array with UNNEST
@@ -50,17 +50,17 @@ WHERE "Casual" IN UNNEST(cuisine_array);
 # Create a simple struct
 #standardSQL
 CREATE OR REPLACE TABLE `array-and-struct.struct.restaurant_cuisine` AS (
-SELECT "Cafe Paci" AS name, "Newtown" AS location,
-STRUCT(["European", "Casual", "Wine bar"] AS cuisine_array, "$$$" AS price_range, False AS has_delivery) AS basic_info
+SELECT "Cafe Pacific" AS name, "North York" AS location,
+STRUCT(["European", "Casual", "Wine bar"] AS cuisine_array, "100 $" AS price_range, False AS has_delivery) AS basic_info
 UNION ALL
-SELECT "Ho Jiak" AS name, "Haymarket" AS location,
-STRUCT(["Malaysian", "Street-food"] AS cuisine_array, "$$" AS price_range, True AS has_delivery) AS basic_info
+SELECT "Boston Pizza" AS name, "Toronto" AS location,
+STRUCT(["Malaysian", "Street-food"] AS cuisine_array, "50 $" AS price_range, True AS has_delivery) AS basic_info
 UNION ALL
-SELECT "Spice I Am" AS name, "Surry Hills" AS location,
-STRUCT(["Thai", "Casual"] AS cuisine_array, "$$" AS price_range, True AS has_delivery) AS basic_info
+SELECT "Spice on the Streets" AS name, "New York" AS location,
+STRUCT(["Thai", "Casual"] AS cuisine_array, "50 $" AS price_range, True AS has_delivery) AS basic_info
 UNION ALL
-SELECT "Chaco Bar" AS name, "Potts Point" AS location,
-STRUCT(["Japanese", "Yakitori", "Casual"] AS cuisine_array, "$$" AS price_range, False AS has_delivery) AS basic_info);
+SELECT "Sushi Bar" AS name, "LA" AS location,
+STRUCT(["Japanese", "Sushi", "Casual"] AS cuisine_array, "150 $" AS price_range, False AS has_delivery) AS basic_info);
 
 
 
@@ -84,14 +84,14 @@ GROUP BY name, location, price_range;
 # Create nested records from arrays of structs
 #standardSQL
 CREATE OR REPLACE TABLE `array-and-struct.struct.aus_restaurant` AS (
-SELECT "Sydney" as city, [
-STRUCT("Cafe Paci" AS name, "Newtown" AS location, STRUCT(["European", "Casual", "Wine bar"] AS cuisine_array, "$$$" AS price_range, False AS has_delivery) AS basic_info),
-STRUCT("Ho Jiak" AS name, "Haymarket" AS location, STRUCT(["Malaysian", "Street-food"] AS cuisine_array, "$$" AS price_range, True AS has_delivery) AS basic_info),
-STRUCT("Spice I Am" AS name, "Surry Hills" AS location, STRUCT(["Thai", "Casual"] AS cuisine_array, "$$" AS price_range, True AS has_delivery) AS basic_info),
-STRUCT("Chaco Bar" AS name, "Potts Point" AS location, STRUCT(["Japanese", "Yakitori", "Casual"] AS cuisine_array, "$$" AS price_range, False AS has_delivery) AS basic_info)] AS restaurant
+SELECT "North America" as region, [
+STRUCT("Cafe Pacific" AS name, "North York" AS location, STRUCT(["European", "Casual", "Wine bar"] AS cuisine_array, "100 $" AS price_range, False AS has_delivery) AS basic_info),
+STRUCT("Boston Pizza" AS name, "Toronto" AS location, STRUCT(["Malaysian", "Street-food"] AS cuisine_array, "50 $" AS price_range, True AS has_delivery) AS basic_info),
+STRUCT("Spice on the Streets" AS name, "New York" AS location, STRUCT(["Thai", "Casual"] AS cuisine_array, "50 $" AS price_range, True AS has_delivery) AS basic_info),
+STRUCT("Sushi Bar" AS name, "LA" AS location, STRUCT(["Japanese", "Sushi", "Casual"] AS cuisine_array, "150 $" AS price_range, False AS has_delivery) AS basic_info)] AS restaurant
 
 UNION ALL
 
-SELECT "Wollongong" as city, [
-STRUCT("Pizzeria 50" AS name, "Wollongong" AS location, STRUCT(["Pizza"] AS cuisine_array, "$" AS price_range, False AS has_delivery) AS basic_info),
-STRUCT("Debutant" AS name, "Wollongong" AS location, STRUCT(["French", "Bistro"] AS cuisine_array, "$$$" AS price_range, False AS has_delivery) AS basic_info)] AS restaurant);
+SELECT "Europe" as region, [
+STRUCT("Pizza Pizza" AS name, "Paris" AS location, STRUCT(["Pizza"] AS cuisine_array, "200 $" AS price_range, False AS has_delivery) AS basic_info),
+STRUCT("Cafe Coffe Day" AS name, "London" AS location, STRUCT(["French", "Bistro"] AS cuisine_array, "60 $" AS price_range, False AS has_delivery) AS basic_info)] AS restaurant);
