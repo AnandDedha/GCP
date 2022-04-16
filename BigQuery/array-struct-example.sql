@@ -1,6 +1,6 @@
 #Create a simple array with square brackets
 #standardSQL
-CREATE OR REPLACE TABLE `array-and-struct.array.restaurant_cuisine` AS (
+CREATE OR REPLACE TABLE `array_and_struct_demo.restaurant_cuisine` AS (
 SELECT "Cafe Pacific" AS name, "North York" AS location, ["European", "Casual", "Wine bar"] AS cuisine_array
 UNION ALL
 SELECT "Boston Pizza" AS name, "Toronto" AS location, ["Italian", "Pizza", "Fast-food"] AS cuisine_array
@@ -13,28 +13,28 @@ SELECT "Sushi Bar" AS name, "LA" AS location, ["Japanese", "Sushi", "Casual"] AS
 # Break open an array with UNNEST
 #standardSQL
 SELECT name, location, cuisine
-FROM `array-and-struct.array.restaurant_cuisine`, UNNEST(cuisine_array) AS cuisine;
+FROM `array_and_struct_demo.restaurant_cuisine`, UNNEST(cuisine_array) AS cuisine;
 
 
 
 # Aggregate elements into arrays with ARRAY_AGG
 #standardSQL
 SELECT name, location, ARRAY_AGG(cuisine ORDER BY cuisine) AS cuisine_array
-FROM `array-and-struct.array.restaurant_cuisine_unnested`
+FROM `array_and_struct_demo.restaurant_cuisine_unnested`
 GROUP BY name, location;
 
 
 # Count the elements in an array with ARRAY_LENGTH
 #standardSQL
 SELECT name, ARRAY_LENGTH(cuisine_array) AS number_of_label
-FROM `array-and-struct.array.restaurant_cuisine`;
+FROM `array_and_struct_demo.restaurant_cuisine`;
 
 
 
 #standardSQL
 # Unpack cuisine_array
 SELECT name, location, cuisine
-FROM `array-and-struct.array.restaurant_cuisine`, UNNEST(cuisine_array) AS cuisine
+FROM `array_and_struct_demo.restaurant_cuisine`, UNNEST(cuisine_array) AS cuisine
 
 # Filter only restaurants contain "Casual" label
 WHERE "Casual" IN UNNEST(cuisine_array);
