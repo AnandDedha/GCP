@@ -36,10 +36,10 @@ SELECT "Cafe Pacific" AS name, "North York" AS location,
 STRUCT(["European", "Casual", "Wine bar"] AS cuisine_array, "100 $" AS price_range, False AS has_delivery) AS basic_info
 UNION ALL
 SELECT "Boston Pizza" AS name, "Toronto" AS location,
-STRUCT(["Malaysian", "Street-food"] AS cuisine_array, "50 $" AS price_range, True AS has_delivery) AS basic_info
+STRUCT(["Italian", "Pizza", "Fast-food"] AS cuisine_array, "50 $" AS price_range, True AS has_delivery) AS basic_info
 UNION ALL
 SELECT "Spice on the Streets" AS name, "New York" AS location,
-STRUCT(["Thai", "Casual"] AS cuisine_array, "50 $" AS price_range, True AS has_delivery) AS basic_info
+STRUCT(["Indian", "Casual"] AS cuisine_array, "50 $" AS price_range, True AS has_delivery) AS basic_info
 UNION ALL
 SELECT "Sushi Bar" AS name, "LA" AS location,
 STRUCT(["Japanese", "Sushi", "Casual"] AS cuisine_array, "150 $" AS price_range, False AS has_delivery) AS basic_info);
@@ -53,7 +53,7 @@ STRUCT(["Japanese", "Sushi", "Casual"] AS cuisine_array, "150 $" AS price_range,
 WITH casual_delivery AS (
 SELECT name, location, basic_info.price_range AS price_range, cuisine
 FROM `array_and_struct_demo.struct_restaurant_cuisine`, UNNEST(basic_info.cuisine_array) AS cuisine
-WHERE basic_info.has_delivery = true
+WHERE basic_info.has_delivery = True
 AND "Casual" IN UNNEST(basic_info.cuisine_array))
 
 #Regroup cuisine into array for final query result
@@ -68,8 +68,8 @@ GROUP BY name, location, price_range;
 CREATE OR REPLACE TABLE `array-and-struct.struct.aus_restaurant` AS (
 SELECT "North America" as region, [
 STRUCT("Cafe Pacific" AS name, "North York" AS location, STRUCT(["European", "Casual", "Wine bar"] AS cuisine_array, "100 $" AS price_range, False AS has_delivery) AS basic_info),
-STRUCT("Boston Pizza" AS name, "Toronto" AS location, STRUCT(["Malaysian", "Street-food"] AS cuisine_array, "50 $" AS price_range, True AS has_delivery) AS basic_info),
-STRUCT("Spice on the Streets" AS name, "New York" AS location, STRUCT(["Thai", "Casual"] AS cuisine_array, "50 $" AS price_range, True AS has_delivery) AS basic_info),
+STRUCT("Boston Pizza" AS name, "Toronto" AS location, STRUCT(["Italian", "Pizza", "Fast-food"] AS cuisine_array, "50 $" AS price_range, True AS has_delivery) AS basic_info),
+STRUCT("Spice on the Streets" AS name, "New York" AS location, STRUCT(["Indian", "Casual"] AS cuisine_array, "50 $" AS price_range, True AS has_delivery) AS basic_info),
 STRUCT("Sushi Bar" AS name, "LA" AS location, STRUCT(["Japanese", "Sushi", "Casual"] AS cuisine_array, "150 $" AS price_range, False AS has_delivery) AS basic_info)] AS restaurant
 
 UNION ALL
