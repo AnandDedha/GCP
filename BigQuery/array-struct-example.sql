@@ -77,3 +77,6 @@ UNION ALL
 SELECT "Europe" as region, [
 STRUCT("Pizza Pizza" AS name, "Paris" AS location, STRUCT(["Pizza"] AS cuisine_array, "200 $" AS price_range, False AS has_delivery) AS basic_info),
 STRUCT("Cafe Coffe Day" AS name, "London" AS location, STRUCT(["French", "Bistro"] AS cuisine_array, "60 $" AS price_range, False AS has_delivery) AS basic_info)] AS restaurant);
+
+
+# End
