@@ -31,7 +31,7 @@ WHERE "Casual" IN UNNEST(cuisine_array);
 
 # Create a simple struct
 #standardSQL
-CREATE OR REPLACE TABLE `array-and-struct.struct.restaurant_cuisine` AS (
+CREATE OR REPLACE TABLE `array_and_struct_demo.struct_restaurant_cuisine` AS (
 SELECT "Cafe Pacific" AS name, "North York" AS location,
 STRUCT(["European", "Casual", "Wine bar"] AS cuisine_array, "100 $" AS price_range, False AS has_delivery) AS basic_info
 UNION ALL
@@ -52,7 +52,7 @@ STRUCT(["Japanese", "Sushi", "Casual"] AS cuisine_array, "150 $" AS price_range,
 # Filter casual restaurants with delivery service
 WITH casual_delivery AS (
 SELECT name, location, basic_info.price_range AS price_range, cuisine
-FROM `array-and-struct.struct.restaurant_cuisine`, UNNEST(basic_info.cuisine_array) AS cuisine
+FROM `array_and_struct_demo.struct_restaurant_cuisine`, UNNEST(basic_info.cuisine_array) AS cuisine
 WHERE basic_info.has_delivery = true
 AND "Casual" IN UNNEST(basic_info.cuisine_array))
 
