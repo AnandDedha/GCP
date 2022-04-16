@@ -17,27 +17,11 @@ FROM `array_and_struct_demo.restaurant_cuisine`, UNNEST(cuisine_array) AS cuisin
 
 
 
-# Aggregate elements into arrays with ARRAY_AGG
-#standardSQL
-SELECT name, location, ARRAY_AGG(cuisine ORDER BY cuisine) AS cuisine_array
-FROM `array_and_struct_demo.restaurant_cuisine_unnested`
-GROUP BY name, location;
-
-
 # Count the elements in an array with ARRAY_LENGTH
 #standardSQL
 SELECT name, ARRAY_LENGTH(cuisine_array) AS number_of_label
 FROM `array_and_struct_demo.restaurant_cuisine`;
 
-
-
-#standardSQL
-# Unpack cuisine_array
-SELECT name, location, cuisine
-FROM `array_and_struct_demo.restaurant_cuisine`, UNNEST(cuisine_array) AS cuisine
-
-# Filter only restaurants contain "Casual" label
-WHERE "Casual" IN UNNEST(cuisine_array);
 
 
 #standardSQL
