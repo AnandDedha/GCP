@@ -23,10 +23,8 @@ SELECT name, ARRAY_LENGTH(cuisine_array) AS number_of_label
 FROM `array_and_struct_demo.restaurant_cuisine`;
 
 
-
-#standardSQL
 SELECT *
-FROM `array.restaurant_cuisine`
+FROM `array_and_struct_demo.restaurant_cuisine`
 # Filter only restaurants contain "Casual" labels
 WHERE "Casual" IN UNNEST(cuisine_array);
 
