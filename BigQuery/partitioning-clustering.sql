@@ -1,3 +1,6 @@
+select _PARTITIONTIME as pt, _PARTITIONDATE as pd, name from `bigquery-demo-347418.demodataset.names`
+
+
 #standardSQL
 CREATE OR REPLACE TABLE `stackoverflow.questions_2018_clustered`
 PARTITION BY
