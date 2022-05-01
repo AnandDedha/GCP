@@ -25,7 +25,7 @@ SELECT
 ## MATERIALIZED VIEW  demo
 
 CREATE MATERIALIZED VIEW  bigquery-demo-347418.mv_demo.my_mv_table
-AS SELECT product_id, SUM(clicks) AS sum_clicks
+AS SELECT Name, SUM(count) AS sum_count
 FROM `bigquery-demo-347418.mv_demo.names`
 GROUP BY 1
 
