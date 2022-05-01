@@ -1,3 +1,4 @@
+## Creating view using the BigQuery DDL
 CREATE VIEW views_demo.male_names(name, number) AS
 SELECT
       name,
