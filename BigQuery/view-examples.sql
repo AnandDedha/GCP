@@ -9,3 +9,15 @@ SELECT
       Gender = "M"
     ORDER BY
       count DESC
+
+
+## Creating view using the BigQuery DDL
+SELECT
+      name,
+      count
+    FROM
+      `bigquery-demo-347418.Views_Demo.names`
+    WHERE
+      Gender = "F"
+    ORDER BY
+      count DESC
