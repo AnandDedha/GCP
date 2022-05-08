@@ -44,6 +44,11 @@ AS
   FROM `bigquery-public-data.usa_names.usa_1910_current`
   WHERE year = y
   GROUP BY year, name
+  
+## TVF example
+SELECT * FROM mydataset.names_by_year(1950)
+  ORDER BY total DESC
+  LIMIT 5
 
 ## Routines Info
 SELECT *
