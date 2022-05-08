@@ -37,6 +37,13 @@ CREATE OR REPLACE FUNCTION
   AS (REGEXP_REPLACE(LOWER(TRIM(text)), '[^a-zA-Z0-9 ]+', ''));
 
 
+## Table Valued function
+CREATE OR REPLACE TABLE FUNCTION udf.names_by_year(y INT64)
+AS
+  SELECT year, name, SUM(number) AS total
+  FROM `bigquery-public-data.usa_names.usa_1910_current`
+  WHERE year = y
+  GROUP BY year, name
 
 ## Routines Info
 SELECT *
