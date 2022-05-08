@@ -9,3 +9,9 @@ BEGIN
 END
 
 ## UDf
+
+
+
+## Routines Info
+SELECT *
+  FROM udf.INFORMATION_SCHEMA.ROUTINES
